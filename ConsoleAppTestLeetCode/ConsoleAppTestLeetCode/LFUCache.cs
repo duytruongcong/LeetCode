@@ -105,7 +105,7 @@ namespace ConsoleAppTestLeetCode
                     //insert new
                     foreach (Node node in _cache)
                     {
-                        if (node.Key == tmpKey && node.DateTime == tmpDateTime)
+                        if (node.Key == tmpKey && node.DateTime.Millisecond == tmpDateTime.Millisecond)
                         {
                             node.Key = key;
                             node.Value = value;
@@ -143,6 +143,21 @@ namespace ConsoleAppTestLeetCode
                 }
             }
             return number;
+        }
+
+        public void PrintKeyValue()
+        {
+            for (int i = 0; i < _cache.Length; i++)
+            {
+                if (_cache[i]==null)
+                {
+                    Console.WriteLine($"node{i} null");
+                }
+                else
+                {
+                    Console.WriteLine($"[{_cache[i].Key} | {_cache[i].Value} | {_cache[i].Count} | {_cache[i].DateTime}]");
+                }
+            } 
         }
     }
 
