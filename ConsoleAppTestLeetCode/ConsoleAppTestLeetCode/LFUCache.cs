@@ -31,6 +31,7 @@ namespace ConsoleAppTestLeetCode
                     if (node.Key == key)
                     {
                         node.Count++;
+                        node.DateTime = DateTime.Now;
                         return node.Value;
                     }
                 }
@@ -97,15 +98,20 @@ namespace ConsoleAppTestLeetCode
                         if (_cache[i].Count == minCount)
                         {
                             tmpKey = _cache[i].Key;
-                            if (tmpDateTime > _cache[i].DateTime)
+                            long tmpLongDateTime = ConvertToMilliseconds(tmpDateTime);
+                            long tmpCachtIDateTime = ConvertToMilliseconds(_cache[i].DateTime);
+
+                            if (tmpLongDateTime > tmpCachtIDateTime)
                                 tmpDateTime = _cache[i].DateTime;
+
+
                         }
                     }
 
                     //insert new
                     foreach (Node node in _cache)
                     {
-                        if (node.Key == tmpKey && node.DateTime.Millisecond == tmpDateTime.Millisecond)
+                        if (node.Key == tmpKey && (DateTime.Compare(tmpDateTime, node.DateTime) == 0))
                         {
                             node.Key = key;
                             node.Value = value;
@@ -149,7 +155,7 @@ namespace ConsoleAppTestLeetCode
         {
             for (int i = 0; i < _cache.Length; i++)
             {
-                if (_cache[i]==null)
+                if (_cache[i] == null)
                 {
                     Console.WriteLine($"node{i} null");
                 }
@@ -157,7 +163,14 @@ namespace ConsoleAppTestLeetCode
                 {
                     Console.WriteLine($"[{_cache[i].Key} | {_cache[i].Value} | {_cache[i].Count} | {_cache[i].DateTime}]");
                 }
-            } 
+            }
+        }
+
+        public long ConvertToMilliseconds(DateTime dateTime)
+        {
+            DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan timeSpan = dateTime.ToUniversalTime() - unixEpoch;
+            return (long)timeSpan.TotalMilliseconds;
         }
     }
 
