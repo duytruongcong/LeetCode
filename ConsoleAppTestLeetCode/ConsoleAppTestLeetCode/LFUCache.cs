@@ -11,6 +11,7 @@ namespace ConsoleAppTestLeetCode
     {
         int _capacity;
         Node[] _cache;
+        Queue<int> _queue;
 
         public LFUCache(int capacity)
         {
@@ -20,6 +21,8 @@ namespace ConsoleAppTestLeetCode
             {
                 _cache[i] = new Node();
             }
+
+            _queue = new Queue<int>();
         }
 
         public int Get(int key)
