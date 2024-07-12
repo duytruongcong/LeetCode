@@ -34,7 +34,6 @@ namespace ConsoleAppTestLeetCode
                     if (node.Key == key)
                     {
                         node.Count++;
-                        node.DateTime = DateTime.Now;
                         return node.Value;
                     }
                 }
@@ -54,7 +53,6 @@ namespace ConsoleAppTestLeetCode
                     if (node.Key == key)
                     {
                         node.Value = value;
-                        node.DateTime = DateTime.Now;
                         node.Count++;
                         return;
                     }
@@ -71,7 +69,6 @@ namespace ConsoleAppTestLeetCode
                         {
                             _cache[i].Key = key;
                             _cache[i].Value = value;
-                            _cache[i].DateTime = DateTime.Now;
                             _cache[i].Count++;
                             return;
                         }
@@ -91,7 +88,6 @@ namespace ConsoleAppTestLeetCode
                         if (_cache[i].Count == minCount)
                         {
                             tmpKey = _cache[i].Key;
-                            tmpDateTime = _cache[i].DateTime;//lay duoc datime node dau tien
                             break;
                         }
                     }
@@ -101,24 +97,16 @@ namespace ConsoleAppTestLeetCode
                         if (_cache[i].Count == minCount)
                         {
                             tmpKey = _cache[i].Key;
-                            long tmpLongDateTime = ConvertToMilliseconds(tmpDateTime);
-                            long tmpCachtIDateTime = ConvertToMilliseconds(_cache[i].DateTime);
-
-                            if (tmpLongDateTime > tmpCachtIDateTime)
-                                tmpDateTime = _cache[i].DateTime;
-
-
                         }
                     }
 
                     //insert new
                     foreach (Node node in _cache)
                     {
-                        if (node.Key == tmpKey && (DateTime.Compare(tmpDateTime, node.DateTime) == 0))
+                        if (node.Key == tmpKey )
                         {
                             node.Key = key;
                             node.Value = value;
-                            node.DateTime = DateTime.Now;
                             node.Count = 1;
                         }
                     }
@@ -164,16 +152,9 @@ namespace ConsoleAppTestLeetCode
                 }
                 else
                 {
-                    Console.WriteLine($"[{_cache[i].Key} | {_cache[i].Value} | {_cache[i].Count} | {_cache[i].DateTime}]");
+                    Console.WriteLine($"[{_cache[i].Key} | {_cache[i].Value} | {_cache[i].Count}]");
                 }
             }
-        }
-
-        public long ConvertToMilliseconds(DateTime dateTime)
-        {
-            DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            TimeSpan timeSpan = dateTime.ToUniversalTime() - unixEpoch;
-            return (long)timeSpan.TotalMilliseconds;
         }
     }
 
@@ -182,7 +163,6 @@ namespace ConsoleAppTestLeetCode
         public int Key;
         public int Value;
         public int Count;
-        public DateTime DateTime;
 
         public Node()
         {
