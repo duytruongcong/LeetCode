@@ -6,3 +6,6 @@ ConsoleAppTestLeetCode/.vs/ConsoleAppTestLeetCode/v17/
 ConsoleAppTestLeetCode/ConsoleAppTestLeetCode/obj/
 *.bin
 ConsoleAppTestLeetCode/ConsoleAppTestLeetCode/bin/
+*.vsidx
+LeastRecentlyUsedTestApp/LeastRecentlyUsedTestApp/obj/
+LeastRecentlyUsedTestApp/.vs/

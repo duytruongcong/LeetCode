@@ -11,7 +11,7 @@ namespace ConsoleAppTestLeetCode
     {
         int _capacity;
         Node[] _cache;
-        Queue<int> _queue;
+        Pool _pool;
 
         public LFUCache(int capacity)
         {
@@ -22,7 +22,7 @@ namespace ConsoleAppTestLeetCode
                 _cache[i] = new Node();
             }
 
-            _queue = new Queue<int>();
+            _pool = new Pool(capacity);
         }
 
         public int Get(int key)
@@ -54,6 +54,9 @@ namespace ConsoleAppTestLeetCode
                     {
                         node.Value = value;
                         node.Count++;
+
+                        _pool.Push(key);
+
                         return;
                     }
                 }
@@ -70,6 +73,9 @@ namespace ConsoleAppTestLeetCode
                             _cache[i].Key = key;
                             _cache[i].Value = value;
                             _cache[i].Count++;
+
+                            _pool.Push(key);
+
                             return;
                         }
                     }
@@ -78,10 +84,9 @@ namespace ConsoleAppTestLeetCode
                 {
                     //unvalidate LFU and insert
 
-                    //tim minCount
+                    //get minCount
                     int minCount = GetMinCount(_cache);
                     int tmpKey = 0;
-                    DateTime tmpDateTime = DateTime.MinValue;
 
                     for (int i = 0; i < _cache.Length; i++)
                     {
@@ -103,7 +108,7 @@ namespace ConsoleAppTestLeetCode
                     //insert new
                     foreach (Node node in _cache)
                     {
-                        if (node.Key == tmpKey )
+                        if (node.Key == tmpKey)
                         {
                             node.Key = key;
                             node.Value = value;
@@ -111,6 +116,8 @@ namespace ConsoleAppTestLeetCode
                         }
                     }
                 }
+
+                _queue.Enqueue(key);
             }
         }
 
@@ -171,4 +178,26 @@ namespace ConsoleAppTestLeetCode
             Count = 0;
         }
     }
+
+    public class Pool
+    {
+        public int Capacity;
+        public int[] Keys;
+        private int Count = 0;
+
+        public Pool(int capacity)
+        {
+            Capacity = capacity;
+            Keys = new int[capacity];
+        }
+
+        public void Push(int key)
+        {
+            Keys[Count++] = key;
+
+            if (Count == Capacity)
+                Count = 0;
+        }
+    }
+
 }
