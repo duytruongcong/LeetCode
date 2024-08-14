@@ -11,7 +11,6 @@ namespace ConsoleAppTestLeetCode
     {
         int _capacity;
         Node[] _cache;
-        Pool _pool;
 
         public LFUCache(int capacity)
         {
@@ -21,8 +20,6 @@ namespace ConsoleAppTestLeetCode
             {
                 _cache[i] = new Node();
             }
-
-            _pool = new Pool(capacity);
         }
 
         public int Get(int key)
@@ -34,8 +31,11 @@ namespace ConsoleAppTestLeetCode
                     if (node.Key == key)
                     {
                         node.Count++;
+                        node.Old = 0;
                         return node.Value;
                     }
+
+                    node.Old++;
                 }
                 return -1;
             }
@@ -45,6 +45,8 @@ namespace ConsoleAppTestLeetCode
 
         public void Put(int key, int value)
         {
+            bool hasKey = false;
+
             if (_cache != null)
             {
                 //if existed, update
@@ -54,12 +56,18 @@ namespace ConsoleAppTestLeetCode
                     {
                         node.Value = value;
                         node.Count++;
+                        node.Old = 0;
 
-                        _pool.Push(key);
-
-                        return;
+                        hasKey = true;
+                    }
+                    else
+                    {
+                        node.Old++;
                     }
                 }
+
+                if (hasKey == true)
+                    return;
 
                 //if not existed, insert if numberNode < _capacity
                 var numberNode = GetNumberOfCache();
@@ -73,10 +81,11 @@ namespace ConsoleAppTestLeetCode
                             _cache[i].Key = key;
                             _cache[i].Value = value;
                             _cache[i].Count++;
-
-                            _pool.Push(key);
-
-                            return;
+                            _cache[i].Old = 0;
+                        }
+                        else
+                        {
+                            _cache[i].Old++;
                         }
                     }
                 }
@@ -86,39 +95,53 @@ namespace ConsoleAppTestLeetCode
 
                     //get minCount
                     int minCount = GetMinCount(_cache);
-                    int tmpKey = 0;
+                    List<int> listKey = new List<int>();
 
                     for (int i = 0; i < _cache.Length; i++)
                     {
                         if (_cache[i].Count == minCount)
                         {
-                            tmpKey = _cache[i].Key;
-                            break;
+                            listKey.Add(_cache[i].Key);
                         }
                     }
 
-                    for (int i = 0; i < _cache.Length; i++)
-                    {
-                        if (_cache[i].Count == minCount)
-                        {
-                            tmpKey = _cache[i].Key;
-                        }
-                    }
+                    // tu lisKey, tim ra max Old
 
-                    //insert new
+                    (int keyResult,int maxOld) = GetMaxOldFromListKey(_cache, listKey);
+
+
+                    //insert
                     foreach (Node node in _cache)
                     {
-                        if (node.Key == tmpKey)
+                        if (node.Key == keyResult)
                         {
                             node.Key = key;
                             node.Value = value;
                             node.Count = 1;
+                            node.Old = 0;
+                        }
+                        {
+                            node.Old++;
                         }
                     }
                 }
-
-                _queue.Enqueue(key);
             }
+        }
+
+        private (int key, int maxOld) GetMaxOldFromListKey(Node[] cache, List<int> listKey)
+        {
+            int maxOld = 0;
+            int keyResult = 0;
+
+            foreach (int key in listKey)
+            {
+                if (maxOld <= cache[key].Old)
+                {
+                    maxOld = cache[key].Old;
+                    keyResult = key;
+                }
+            }
+            return (keyResult, maxOld);
         }
 
         private int GetMinCount(Node[] cache)
@@ -170,34 +193,14 @@ namespace ConsoleAppTestLeetCode
         public int Key;
         public int Value;
         public int Count;
+        public int Old;
 
         public Node()
         {
             Key = -1;
             Value = -1;
             Count = 0;
+            Old = 0;
         }
     }
-
-    public class Pool
-    {
-        public int Capacity;
-        public int[] Keys;
-        private int Count = 0;
-
-        public Pool(int capacity)
-        {
-            Capacity = capacity;
-            Keys = new int[capacity];
-        }
-
-        public void Push(int key)
-        {
-            Keys[Count++] = key;
-
-            if (Count == Capacity)
-                Count = 0;
-        }
-    }
-
 }
