@@ -24,6 +24,8 @@ namespace ConsoleAppTestLeetCode
 
         public int Get(int key)
         {
+            int result = -1;
+
             if (_cache != null)
             {
                 foreach (Node node in _cache)
@@ -32,15 +34,14 @@ namespace ConsoleAppTestLeetCode
                     {
                         node.Count++;
                         node.Old = 0;
-                        return node.Value;
+                        result = node.Value;
                     }
 
                     node.Old++;
                 }
-                return -1;
             }
-            else
-                return -1;
+            
+            return result;
         }
 
         public void Put(int key, int value)
