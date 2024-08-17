@@ -74,7 +74,7 @@ namespace ConsoleAppTestLeetCode
                 if (numberNode < _capacity)
                 {
                     //insert
-                    for (int i = 0; i <= _cache.Length; i++)
+                    for (int i = 0; i < _cache.Length; i++)
                     {
                         if (_cache[i].Key == -1)
                         {
@@ -82,10 +82,8 @@ namespace ConsoleAppTestLeetCode
                             _cache[i].Value = value;
                             _cache[i].Count++;
                             _cache[i].Old = 0;
-                        }
-                        else
-                        {
-                            _cache[i].Old++;
+
+                            return;
                         }
                     }
                 }
@@ -107,7 +105,7 @@ namespace ConsoleAppTestLeetCode
 
                     // tu lisKey, tim ra max Old
 
-                    (int keyResult,int maxOld) = GetMaxOldFromListKey(_cache, listKey);
+                    (int keyResult, int maxOld) = GetMaxOldFromListKey(_cache, listKey);
 
 
                     //insert
@@ -120,9 +118,6 @@ namespace ConsoleAppTestLeetCode
                             node.Count = 1;
                             node.Old = 0;
                         }
-                        {
-                            node.Old++;
-                        }
                     }
                 }
             }
@@ -132,9 +127,12 @@ namespace ConsoleAppTestLeetCode
         {
             int maxOld = 0;
             int keyResult = 0;
+            int tmpOld = 0;
 
             foreach (int key in listKey)
             {
+                tmpOld = GetOldFromKey(key);
+
                 if (maxOld <= cache[key].Old)
                 {
                     maxOld = cache[key].Old;
@@ -142,6 +140,19 @@ namespace ConsoleAppTestLeetCode
                 }
             }
             return (keyResult, maxOld);
+        }
+
+        int GetOldFromKey(int key)
+        {
+            foreach (Node node in _cache)
+            {
+                if (node.Key == key)
+                {
+                    return node.Old;
+                }
+            }
+
+            return 0;
         }
 
         private int GetMinCount(Node[] cache)
@@ -182,7 +193,7 @@ namespace ConsoleAppTestLeetCode
                 }
                 else
                 {
-                    Console.WriteLine($"[{_cache[i].Key} | {_cache[i].Value} | {_cache[i].Count}]");
+                    Console.WriteLine($"[Key: {_cache[i].Key} |Value: {_cache[i].Value} |Count: {_cache[i].Count} |Old: {_cache[i].Old}]");
                 }
             }
         }
