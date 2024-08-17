@@ -36,8 +36,10 @@ namespace ConsoleAppTestLeetCode
                         node.Old = 0;
                         result = node.Value;
                     }
-
-                    node.Old++;
+                    else
+                    {
+                        node.Old++;
+                    }
                 }
             }
             
@@ -134,9 +136,9 @@ namespace ConsoleAppTestLeetCode
             {
                 tmpOld = GetOldFromKey(key);
 
-                if (maxOld <= cache[key].Old)
+                if (maxOld <= tmpOld)
                 {
-                    maxOld = cache[key].Old;
+                    maxOld = tmpOld;
                     keyResult = key;
                 }
             }
