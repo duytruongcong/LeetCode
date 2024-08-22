@@ -9,3 +9,10 @@ ConsoleAppTestLeetCode/ConsoleAppTestLeetCode/bin/
 *.vsidx
 LeastRecentlyUsedTestApp/LeastRecentlyUsedTestApp/obj/
 LeastRecentlyUsedTestApp/.vs/
+LFUCacheCPlusPlus/.vs/
+LFUCacheCPlusPlus/LFUCacheCPlusPlus/LFUCacheCPlusPlus.vcxproj
+LFUCacheCPlusPlus/LFUCacheCPlusPlus/LFUCacheCPlusPlus.vcxproj.filters
+LFUCacheCPlusPlus/LFUCacheCPlusPlus/LFUCacheCPlusPlus.vcxproj.user
+LFUCacheCPlusPlus/LFUCacheCPlusPlus/x64/
+LFUCacheCPlusPlus/x64/Debug/LFUCacheCPlusPlus.exe
+LFUCacheCPlusPlus/x64/
