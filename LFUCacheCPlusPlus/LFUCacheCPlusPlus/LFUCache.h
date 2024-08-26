@@ -6,10 +6,21 @@ public:
 	int _capacity;
 	Node* _cache;
 
-	LFUCache( int capacity)
+	LFUCache(int capacity)
 	{
 		_capacity = capacity;
-		_cache = 
+		_cache = new Node[capacity];
+
+		for (int i = 0; i <= capacity; i++)
+		{
+			_cache[i] = new Node();
+		}
+	}
+
+	~LFUCache()
+	{
+		delete _cache;
+		_cache = nullptr;
 	}
 };
 
