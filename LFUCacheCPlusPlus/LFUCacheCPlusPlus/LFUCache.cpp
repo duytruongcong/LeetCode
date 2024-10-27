@@ -4,7 +4,7 @@ class LFUCache
 {
 public:
 	int _capacity;
-	Node* _pCache;
+	Node _pCache[];
 
 	LFUCache(int capacity)
 	{
@@ -13,7 +13,7 @@ public:
 
 		for (int i = 0; i <= capacity; i++)
 		{
-			_pCache[i] = new Node();
+			*(_pCache + i) = (Node*)calloc;
 		}
 	}
 
