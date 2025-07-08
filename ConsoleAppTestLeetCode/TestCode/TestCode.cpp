@@ -3,8 +3,8 @@
 using namespace std;
 
 int main() {
-	string s1 ("What is the sound of one clam napping?");
-	string s2 ("Anything worth doing is worth overdoing.");
+	string s1("What is the sound of one clam napping?");
+	string s2("Anything worth doing is worth overdoing.");
 	string s3("I saw Elvis in a UFO.");
 	// Copy the first 8 chars
 	string s4(s1, 0, 8);
