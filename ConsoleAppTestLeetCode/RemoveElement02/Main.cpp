@@ -1,27 +1,26 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include<vector>
 using namespace std;
 
-int RemoveElement(int value, int nums[], int sizeOfNums)
+int RemoveElement(vector<int>& array, const int value, int sizeOfArray)
 {
-	for (int i = 0; i < sizeOfNums; i++)
-	{
-		while (value == nums[i])
-		{
-			for (int j = i; j < sizeOfNums; j++)
-			{
-				nums[j] = nums[j+1];
-			}
+	int k = 0;
 
-			sizeOfNums--;
+	for (int i = 0; i < sizeOfArray; i++)
+	{
+		if (value != array[i])
+		{
+			array[k] = array[i];
+			k++;
 		}
 	}
 
-	return sizeOfNums;
+	return k;
 }
 
-void PrintArray(const int* array, const int sizeOfArray)
+void PrintArray(const vector<int> array, const int sizeOfArray)
 {
 	for (int i = 0; i < sizeOfArray; i++)
 	{
@@ -33,28 +32,18 @@ void PrintArray(const int* array, const int sizeOfArray)
 
 int main()
 {
-	int nums[] = { 2,3,3,5,6,7,7,9,7,7,8,1, };
-
-	int sizeOfNums = sizeof(nums) / sizeof(int);
+	vector<int> nums = { 2,3,3,5,6,7,7,9,7,7,8,1 };
 
 	int val = 7;
 
 	int sizeOfExpectedNums = 0;
 
-	PrintArray(nums, sizeOfNums);
+	PrintArray(nums, nums.size());
 
-	sizeOfExpectedNums = RemoveElement(val, nums, sizeOfNums);
+	sizeOfExpectedNums = RemoveElement(nums, val, nums.size());
 
-	int* expectedNums = new int[sizeOfExpectedNums];
+	PrintArray(nums, sizeOfExpectedNums);
 
-	for (int i = 0; i < sizeOfExpectedNums; i++)
-	{
-		expectedNums[i] = nums[i];
-	}
-
-	//PrintArray(nums);
-
-	PrintArray(expectedNums, sizeOfExpectedNums);
 
 	cin.get();
 	return 0;
