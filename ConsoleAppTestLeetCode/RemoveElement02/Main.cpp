@@ -4,15 +4,15 @@
 #include<vector>
 using namespace std;
 
-int RemoveElement(vector<int>& array, const int value, int sizeOfArray)
+int RemoveElement(int* const arrNums, const int value, int sizeOfArray)
 {
 	int k = 0;
 
 	for (int i = 0; i < sizeOfArray; i++)
 	{
-		if (value != array[i])
+		if (value != arrNums[i])
 		{
-			array[k] = array[i];
+			arrNums[k] = arrNums[i];
 			k++;
 		}
 	}
@@ -20,7 +20,7 @@ int RemoveElement(vector<int>& array, const int value, int sizeOfArray)
 	return k;
 }
 
-void PrintArray(const vector<int> array, const int sizeOfArray)
+void PrintArray(const int* const array, const int sizeOfArray)
 {
 	for (int i = 0; i < sizeOfArray; i++)
 	{
@@ -32,18 +32,20 @@ void PrintArray(const vector<int> array, const int sizeOfArray)
 
 int main()
 {
-	vector<int> nums = { 2,3,3,5,6,7,7,9,7,7,8,1 };
+	int size = 12;
+	int* nums = new int[size] { 2,3,3,5,6,7,7,9,7,7,8,1 };
 
 	int val = 7;
 
 	int sizeOfExpectedNums = 0;
 
-	PrintArray(nums, nums.size());
+	PrintArray(nums, size);
 
-	sizeOfExpectedNums = RemoveElement(nums, val, nums.size());
+	sizeOfExpectedNums = RemoveElement(nums, val, size);
 
 	PrintArray(nums, sizeOfExpectedNums);
 
+	delete[] nums;
 
 	cin.get();
 	return 0;
