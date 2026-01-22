@@ -1,56 +1,53 @@
-// TwoSumCPP.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <unordered_map>
+#include <string>
+
+
 
 int main()
 {
-	int number;
-	int nums[10];
+	//declare an unordered map with string keys and int values
+	std::unordered_map<std::string, int> umap;
 
-	srand(static_cast<unsigned int>(time(0)));
+	//insert elements using [] operator and insert() method
+	umap["apple"] = 1;
+	umap.insert({"banana", 2});
+	umap["orange"] = 3;
 
-	int numsCount = sizeof(nums) / sizeof(int);
 
-	for (int i = 0; i < numsCount; i++)
+
+	// Access elements 
+	std::cout << "Value for apple: " << umap["apple"] << std::endl;
+
+	//The at() funcion also can be used and throw and exception if the key isn't found
+	std::cout << "Value for banana: " << umap.at("banana") << std::endl;
+
+
+	//iterate through the map using a range-based for loop
+
+	for(const auto& pair : umap)
 	{
-		nums[i] = rand() % 10;
+		std::cout << pair.first << ": " << pair.second << std::endl;
 	}
 
-	std::cout << "Array is:\n";
+	//check if a key exists using find() method
 
-	for (int i = 0; i < numsCount; i++)
+	if(umap.find("grape")==umap.end())
 	{
-		std::cout << "(" << i << ")" << nums[i] << "->";
+		std::cout << "Grape not found" << std::endl;
+
 	}
 
-	std::cout << "\nEnter an integer number:\n";
+	//remove an element using erase()
+	umap.erase("orange");
 
-	std::cin >> number;
 
-	for (int i = 0; i < numsCount; i++)
-	{
-		for (int j = i + 1; j < numsCount; j++)
-		{
-			if ((nums[i] + nums[j]) == number)
-			{
-				std::cout << "(" << i << ")" << nums[i] << " | " << "(" << j << ")" << nums[j] << std::endl;
-			}
-		}
-	}
+	//get the size of  the map
+	std::cout << "Map size after erase:" << umap.size() << std::endl;
 
-	system("pause");
+	
+
+
+
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
