@@ -1,40 +1,41 @@
 #include <iostream>
+#include <vector>
 
-int main()
+void MergeSortedArray(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n)
 {
-    int nums1[] = {5, 7, 8, 10, 13, 0, 0, 0};
-    int nums2[] = {4, 6, 9};
-    int m = 5;
-    int n = 3;
     int tmp = m;
-    int sizeOfNums1 = 8;
+    int sizeOfNums1 = nums1.size();
 
-
-    for (int i = 0; i < n; i++)
+    for (int element2 : nums2)
     {
         for (int j = 0; j < tmp; j++)
         {
-            if (nums1[j] > nums2[i])
+            if (nums1[j] > element2)
             {
-                //dich chuyen cac phan tu qua phai 1
-                for (int k = sizeOfNums1-1; k > j; k--)
-                {
-                    nums1[k] = nums1[k - 1];
-                }
-
-                //
-                nums1[j] = nums2[i];
+                nums1.insert(nums1.begin() + j, element2);
                 tmp++;
                 break;
             }
         }
     }
+}
 
-    //in mang nums1
-    for(int i=0;i<sizeOfNums1;i++)
+void PrintArray(std::vector<int> &array)
+{
+    for (int element : array)
     {
-        std::cout << nums1[i] << " - ";
+        std::cout << element << " - ";
     }
+}
+
+int main()
+{
+    std::vector<int> nums1 = {5, 7, 8, 10, 13, 0, 0, 0};
+    std::vector<int> nums2 = {4, 6, 9};
+
+    MergeSortedArray(nums1, 5, nums2, 3);
+
+    PrintArray(nums1);
 
     return 0;
 }
