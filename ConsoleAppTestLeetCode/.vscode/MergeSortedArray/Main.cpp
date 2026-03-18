@@ -3,20 +3,30 @@
 
 void MergeSortedArray(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n)
 {
-    int tmp = m;
-    int sizeOfNums1 = nums1.size();
+    int p = nums1.size();
+    int i = m - 1;
+    int j = n - 1;
+    int k = p - 1;
 
-    for (int element2 : nums2)
+    while (i != 0 && j != 0)
     {
-        for (int j = 0; j < tmp; j++)
+        if (nums1.at(i) > nums2.at(j))
         {
-            if (nums1[j] > element2)
-            {
-                nums1.insert(nums1.begin() + j, element2);
-                tmp++;
-                break;
-            }
+            nums1.at(k) = nums1.at(i);
+            i--;
         }
+        else
+        {
+            nums1.at(k) = nums2.at(j);
+            j--;
+        }
+
+        k--;
+    }
+
+    while (j >= 0)
+    {
+        nums1[k--] = nums2[j--];
     }
 }
 
