@@ -49,7 +49,7 @@ void InsertionSort(std::vector<int> &nums)
         }
 
         nums[j] = temp;
-         PrintHighlight(nums, j);
+        PrintHighlight(nums, j);
     }
 }
 
@@ -131,15 +131,14 @@ void BubleSort(std::vector<int> &nums)
 
 void ShellSort(std::vector<int> &nums)
 {
-    int size = nums.size();
+    int sizeOfArray = nums.size();
+    int temp, j;
 
-    for (int gap = size / 2; gap > 0; gap /= 2)
+    for (int gap = sizeOfArray / 2; gap > 0; gap /= 2)
     {
-        for (int i = gap; i < size; i++)
+        for (int i = gap; i < sizeOfArray; i++)
         {
-            int temp = nums[i];
-
-            int j;
+            temp = nums[i];
 
             for (j = i; j >= gap && nums[j - gap] > temp; j -= gap)
             {
@@ -147,8 +146,6 @@ void ShellSort(std::vector<int> &nums)
             }
 
             nums[j] = temp;
-
-            Print(nums);
         }
     }
 }
@@ -157,11 +154,11 @@ int main()
 {
     std::vector<int> nums = {3, 2, 0, 5, 8, 4, 7, 1, 8, 6, 9};
 
-    InsertionSort(nums);
-    //  SelectionSort(nums);
-    // SelectionDoubleSort(nums);
-    // BubleSort(nums);
-    // ShellSort(nums);
+    // InsertionSort(nums);
+    //   SelectionSort(nums);
+    //  SelectionDoubleSort(nums);
+    //  BubleSort(nums);
+    ShellSort(nums);
 
     Print(nums);
 
