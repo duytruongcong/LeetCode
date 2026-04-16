@@ -1,23 +1,55 @@
 #include <iostream>
 #include <vector>
 
+void Print(std::vector<int> &nums)
+{
+    int size = nums.size();
+
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << "(" << i << ") ";
+    }
+
+    std::cout << std::endl;
+
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << " " << nums[i] << " |";
+    }
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+}
+
+void PrintHighlight(const std::vector<int> &nums, int j)
+{
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (i == j)
+            std::cout << "[" << nums[i] << "] ";
+        else
+            std::cout << nums[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 void InsertionSort(std::vector<int> &nums)
 {
-    int i, j;
-    int size = nums.size();
-    for (i = 1; i < size; i++)
+    int i, j, temp;
+
+    int sizeOfArray = nums.size();
+
+    for (i = 1; i < sizeOfArray; i++)
     {
-        int key = nums[i];
+        temp = nums[i];
 
-        j = i;
-
-        while (j > 0 && nums[j - 1] > key)
+        for (j = i; j > 0 && nums[j - 1] > temp; j--)
         {
             nums[j] = nums[j - 1];
-            j--;
         }
 
-        nums[j] = key;
+        nums[j] = temp;
+         PrintHighlight(nums, j);
     }
 }
 
@@ -41,18 +73,21 @@ void SelectionSort(std::vector<int> &nums)
     }
 }
 
-void SelectionDoubleSort(std::vector<int>& nums)
+void SelectionDoubleSort(std::vector<int> &nums)
 {
     int left = 0;
     int right = nums.size() - 1;
+    int minIndex, maxIndex;
 
     while (left < right)
     {
-        int minIndex = left;
-        int maxIndex = right;
+        /* code */
+        minIndex = left;
+        maxIndex = right;
 
         for (int i = left; i <= right; i++)
         {
+
             if (nums[i] < nums[minIndex])
                 minIndex = i;
 
@@ -60,31 +95,75 @@ void SelectionDoubleSort(std::vector<int>& nums)
                 maxIndex = i;
         }
 
-        std::swap(nums[left], nums[minIndex]);
+        std::swap(nums[minIndex], nums[left]);
 
-        // fix nếu max bị ảnh hưởng
         if (maxIndex == left)
-            maxIndex = minIndex;//muc dich de lam gi
+            maxIndex = minIndex;
 
-        std::swap(nums[right], nums[maxIndex]);
+        std::swap(nums[maxIndex], nums[right]);
 
         left++;
         right--;
     }
 }
 
+void BubleSort(std::vector<int> &nums)
+{
+    int length = nums.size();
+    bool isSorted = false;
+
+    for (int i = 0; i < length - 1; i++)
+    {
+        isSorted = true;
+        for (int j = 0; j < length - 1 - i; j++)
+        {
+            if (nums[j] > nums[j + 1])
+            {
+                std::swap(nums[j], nums[j + 1]);
+                isSorted = false;
+            }
+
+            if (isSorted)
+                return;
+        }
+    }
+}
+
+void ShellSort(std::vector<int> &nums)
+{
+    int size = nums.size();
+
+    for (int gap = size / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < size; i++)
+        {
+            int temp = nums[i];
+
+            int j;
+
+            for (j = i; j >= gap && nums[j - gap] > temp; j -= gap)
+            {
+                nums[j] = nums[j - gap];
+            }
+
+            nums[j] = temp;
+
+            Print(nums);
+        }
+    }
+}
+
 int main()
 {
-    std::vector<int> nums = {3, 2, 10, 5, 8, 4, 7};
+    std::vector<int> nums = {3, 2, 0, 5, 8, 4, 7, 1, 8, 6, 9};
 
-    //InsertionSort(nums);
-    // SelectionSort(nums);
-    SelectionDoubleSort(nums);
+    InsertionSort(nums);
+    //  SelectionSort(nums);
+    // SelectionDoubleSort(nums);
+    // BubleSort(nums);
+    // ShellSort(nums);
 
-    for (int x : nums)
-    {
-        std::cout << x << "|";
-    }
+    Print(nums);
 
     return 0;
 }
