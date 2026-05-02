@@ -150,15 +150,53 @@ void ShellSort(std::vector<int> &nums)
     }
 }
 
+void MaxHeapNode(std::vector<int> &nums, int n, int i)
+{
+    int max = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && nums[left] > nums[max])
+        max = left;
+
+    if (right < n && nums[right] > nums[max])
+        max = right;
+
+    if (max != i)
+    {
+        std::swap(nums[i], nums[max]);
+        MaxHeapNode(nums, n, max);
+    }
+}
+
+void MaxHeapSort(std::vector<int> &nums, int n)
+{
+    for (int i = (n - 1) / 2; i >= 0; i--)
+    {
+        MaxHeapNode(nums, n, i);
+    }
+}
+
+void HeapSort(std::vector<int> &nums, int n)
+{
+    for (int i = n; i > 1; i--)
+    {
+        MaxHeapSort(nums, i);
+        std::swap(nums[0], nums[i - 1]);
+    }
+}
+
 int main()
 {
     std::vector<int> nums = {3, 2, 0, 5, 8, 4, 7, 1, 8, 6, 9};
+    // std::vector<int> nums = {56, 34, 72, 3, 20, 31, 47, 10, 79, 15, 83, 40};
 
     // InsertionSort(nums);
     //   SelectionSort(nums);
     //  SelectionDoubleSort(nums);
     //  BubleSort(nums);
-    ShellSort(nums);
+    // ShellSort(nums);
+    HeapSort(nums, nums.size());
 
     Print(nums);
 
