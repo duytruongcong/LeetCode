@@ -3,43 +3,48 @@
 struct Node
 {
     int data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
 };
 
-Node *CreateNode(int data)
+Node* createNode(int value)
 {
-    Node *newNode = new Node;
-    newNode->data = data;
-    newNode->left = newNode->right = nullptr;
+    Node* node = new Node;
+    node->data = value;
+    node->left = node->right = nullptr;
 
-    return newNode;
+    return node;
 }
 
-void Print(Node *root)
+void Print(Node* root)
 {
-    if (root == nullptr)
-        return;
+    if(root==nullptr)
+    return;
 
-    std::cout << root->data << " - ";
+    std::cout << root->data << " - " ;
     Print(root->left);
     Print(root->right);
 }
 
+
 int main()
 {
-    Node *root = CreateNode(1);
+    //level 01
+    Node* root = createNode(1);
 
-    root->left = CreateNode(2);
-    root->right = CreateNode(3);
+    //level 02
+    root->left = createNode(2);
+    root->right = createNode(3);
 
-    root->left->left = CreateNode(4);
-    root->left->right = CreateNode(5);
-    root->right->left = CreateNode(6);
-    root->right->right = CreateNode(7);
-
-    root->left->right->left = CreateNode(9);
-    root->right->right->left = CreateNode(15);
+    //level 03
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+    root->right->left = createNode(6);
+    root->right->right = createNode(7);
+    
+    //level 04
+    root->left->right->left = createNode(9);
+    root->right->right->left = createNode(15);
 
     Print(root);
 }
