@@ -66,3 +66,9 @@ ConsoleAppTestLeetCode/.vscode/RemoveElement/Main
 ConsoleAppTestLeetCode/.vscode/SortAlgorithm/InsertionSort
 ConsoleAppTestLeetCode/TestCode/data.txt
 ConsoleAppTestLeetCode/.vscode/SortAlgorithm/SortMehod
+CalculatorCPP/Calculator
+.gitignore
+CalculatorCPP/.vscode/launch.json
+CalculatorCPP/.vscode/tasks.json
+ConsoleAppTestLeetCode/.vscode/BinarySearchTree/BinarySearchTree
+ConsoleAppTestLeetCode/.vscode/Recursion/Test
