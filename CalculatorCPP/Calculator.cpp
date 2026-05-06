@@ -29,17 +29,20 @@ int main()
             break;
 
         case '/':
-            std::cout << " = " << numOne / numTwo;
+            if (numTwo != 0)
+                std::cout << " = " << numOne / numTwo;
+            else
+                std::cout << "Number two must be different 0!";
             break;
 
         case '%':
         {
-            int iNumOne = (int)numOne;
-            int iNumTwo = (int)numTwo;
+            bool isNumOneInt = (int)numOne == numOne;
+            bool isNumTwoInt = (int)numTwo == numTwo;
 
-            if (iNumTwo != 0)
+            if (isNumOneInt && isNumTwoInt && numTwo != 0)
             {
-                std::cout << " = " << iNumOne % iNumTwo;
+                std::cout << " = " << (int)numOne % (int)numTwo;
             }
             else
             {
