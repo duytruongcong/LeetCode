@@ -23,7 +23,7 @@ std::tuple<int, int> CreateValues(int level)
         randomNum = (rand() % 20) + 1; // from 01 to 20
         maxValue = 20;
         break;
-        
+
     case MEDIUM:
         randomNum = (rand() % 50) + 1; // from 01 to 50
         maxValue = 50;
@@ -53,11 +53,12 @@ int main()
     do
     {
         // choose level
-        std::cout << "Which level do you quan to play? \n 0 - LOW \n 1 - MEDIUM \n 2 - HIGH" << std::endl;
+        std::cout << "Which level do you want to play? \n 0 - LOW \n 1 - MEDIUM \n 2 - HIGH" << std::endl;
         std::cin >> intLevel;
 
         auto [randomNum, maxValue] = CreateValues(intLevel);
-
+        tries = 0;
+        
         do
         {
             std::cout << "Please guess the number from 01 to " << maxValue << " : " << std::endl;
