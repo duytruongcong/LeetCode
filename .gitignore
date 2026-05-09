@@ -73,3 +73,6 @@ CalculatorCPP/.vscode/tasks.json
 ConsoleAppTestLeetCode/.vscode/BinarySearchTree/BinarySearchTree
 ConsoleAppTestLeetCode/.vscode/Recursion/Test
 GuessingGame/GuessingGame
+ManageStudentList/Main
+ManageStudentList/.vscode/launch.json
+ManageStudentList/.vscode/tasks.json
