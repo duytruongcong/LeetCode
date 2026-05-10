@@ -1,72 +1,90 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 struct Student
 {
+    static int BaseId;
     int Id;
     std::string Name;
     int Age;
     int Score;
+
+    Student(const std::string &name, int age, int score)
+    {
+        Id = ++BaseId;
+        Name = name;
+        Age = age;
+        Score = score;
+    }
 };
 
-void Add(std::vector<Student> &array, int id, const std::string &name, int age, int score)
-{
-    array.emplace_back(Student{id, name, age, score});
-}
+int Student::BaseId = 0;
 
-void View(const std::vector<Student> &array)
+class Manager
 {
-    for (const auto &x : array)
+private:
+    std::vector<Student> students;
+
+public:
+    Manager()
     {
-        std::cout << "Id: " << x.Id << "| Name: " << x.Name << "| Age: " << x.Age << "| Score: " << x.Score << std::endl;
     }
-}
 
-void RemoveById(std::vector<Student> &array, int removeId)
-{
-    for (auto iter = array.begin(); iter != array.end();)
+    ~Manager()
     {
-        if (iter->Id == removeId)
-            iter = array.erase(iter);
-        else
-            ++iter;
     }
-}
 
-void EditById(std::vector<Student> &array, int id, const std::string &name, int age, int score)
-{
-    for (auto &x : array)
+    void Add(const std::string &name, int age, int score)
     {
-        if (x.Id == id)
+        students.emplace_back(name, age, score);
+    }
+
+    void View() const
+    {
+        for (const auto &x : students)
         {
-            x.Name = name;
-            x.Age = age;
-            x.Score = score;
+            std::cout << "Id: " << x.Id << "| Name: " << x.Name << "| Age: " << x.Age << "| Score: " << x.Score << std::endl;
         }
     }
-}
+
+    void RemoveById(int removeId)
+    {
+        students.erase(std::remove_if(students.begin(), students.end(), [removeId](const Student &s)
+                                      { return s.Id == removeId; }),
+                       students.end());
+    }
+
+    void EditById(int id, const std::string &name, int age, int score)
+    {
+        for (auto &x : students)
+        {
+            if (x.Id == id)
+            {
+                x.Name = name;
+                x.Age = age;
+                x.Score = score;
+            }
+        }
+    }
+};
 
 int main()
 {
-    std::vector<Student> array;
+    Manager Manager;
+    Manager.Add( "Duy", 36, 8);
+    Manager.Add( "Trang", 30, 9);
+    Manager.Add( "Tam", 20, 7);
+    Manager.Add( "Minh", 40, 5);
+    Manager.Add( "Lan", 40, 2);
+    Manager.Add( "Phuong", 26, 7);
+    Manager.View();
 
-    Add(array, 1, "Duy", 36, 8);
-    Add(array, 2, "Trang", 30, 9);
-    Add(array, 3, "Tam", 20, 7);
-    Add(array, 4, "Minh", 40, 5);
-    Add(array, 4, "Minh", 40, 5);
-    Add(array, 4, "Minh", 40, 5);
-    Add(array, 5, "Lan", 40, 2);
-    Add(array, 6, "Phuong", 26, 7);
-
-    View(array);
-    // RemoveById(array, 4);
-
-    EditById(array, 4, "Minh heo", 40, 5);
+    Manager.EditById( 4, "Minh heo", 40, 5);
 
     std::cout << "---------------" << std::endl;
-    View(array);
+    Manager.View();
 
     return 0;
 }
