@@ -2,25 +2,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-
-struct Student
-{
-    static int BaseId;
-    int Id;
-    std::string Name;
-    int Age;
-    int Score;
-
-    Student(const std::string &name, int age, int score)
-    {
-        Id = ++BaseId;
-        Name = name;
-        Age = age;
-        Score = score;
-    }
-};
-
-int Student::BaseId = 0;
+#include "Student.h"
+#include "Database.h"
 
 class Manager
 {
@@ -70,21 +53,45 @@ public:
     }
 };
 
+void View(const std::vector<Student> &array)
+{
+    for (const auto &x : array)
+    {
+        std::cout
+            << x.Id << " | "
+            << x.Name << " | "
+            << x.Age << " | "
+            << x.Score
+            << '\n';
+    }
+}
+
 int main()
 {
-    Manager Manager;
-    Manager.Add( "Duy", 36, 8);
-    Manager.Add( "Trang", 30, 9);
-    Manager.Add( "Tam", 20, 7);
-    Manager.Add( "Minh", 40, 5);
-    Manager.Add( "Lan", 40, 2);
-    Manager.Add( "Phuong", 26, 7);
-    Manager.View();
+    // Manager Manager;
+    // Manager.Add( "Duy", 36, 8);
+    // Manager.Add( "Trang", 30, 9);
+    // Manager.Add( "Tam", 20, 7);
+    // Manager.Add( "Minh", 40, 5);
+    // Manager.Add( "Lan", 40, 2);
+    // Manager.Add( "Phuong", 26, 7);
+    // Manager.View();
 
-    Manager.EditById( 4, "Minh heo", 40, 5);
+    // Manager.EditById( 4, "Minh heo", 40, 5);
 
-    std::cout << "---------------" << std::endl;
-    Manager.View();
+    // std::cout << "---------------" << std::endl;
+    // Manager.View();
+
+    std::vector<Student> students;
+
+    Database::Load(students, "students.csv");
+
+    students.emplace_back("Duy", 36, 8);
+    students.emplace_back("Trang", 30, 9);
+
+    Database::Save(students, "students.csv");
+
+    View(students);
 
     return 0;
 }
