@@ -45,12 +45,12 @@ void Manager::Save(const std::string &filename)
         return;
     }
 
-    for (const auto s : Manager::students)
+    for (const auto student : Manager::students)
     {
-        file << s.Id << ","
-             << s.Name << ","
-             << s.Age << ","
-             << s.Score
+        file << student.Id << ","
+             << student.Name << ","
+             << student.Age << ","
+             << student.Score
              << "\n";
     }
 
@@ -84,13 +84,13 @@ void Manager::Load(const std::string &filename)
         std::getline(ss, ageStr, ',');
         std::getline(ss, scoreStr, ',');
 
-        Student s;
-        s.Id = std::stoi(idStr);
-        s.Name = name;
-        s.Age = std::stoi(ageStr);
-        s.Score = std::stoi(scoreStr);
+        Student student;
+        student.Id = std::stoi(idStr);
+        student.Name = name;
+        student.Age = std::stoi(ageStr);
+        student.Score = std::stoi(scoreStr);
 
-        students.push_back(s);
+        students.push_back(student);
     }
 
     file.close();
