@@ -1,6 +1,7 @@
 #include "Manager.h"
 
 std::vector<Student> Manager::students;
+int Manager::maxId = 0;
 
 void Manager::Add(const std::string &name, int age, int score)
 {
@@ -34,7 +35,6 @@ void Manager::EditById(int id, const std::string &name, int age, int score)
         }
     }
 }
-
 
 void Manager::Save(const std::string &filename)
 {
@@ -91,6 +91,12 @@ void Manager::Load(const std::string &filename)
         student.Score = std::stoi(scoreStr);
 
         students.push_back(student);
+    }
+
+    for (auto x : students)
+    {
+        if (Manager::maxId < x.Id)
+            Manager::maxId = x.Id;
     }
 
     file.close();

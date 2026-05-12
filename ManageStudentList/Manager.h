@@ -8,10 +8,9 @@
 
 class Manager
 {
-private:
-    static std::vector<Student> students;
-
 public:
+    static std::vector<Student> students;
+    static int maxId;
     Manager()
     {
     }

@@ -3,7 +3,6 @@
 
 struct Student
 {
-    static int BaseId;
     int Id;
     std::string Name;
     int Age;
