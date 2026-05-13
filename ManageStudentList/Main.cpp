@@ -56,49 +56,62 @@ void RemoveStudent(Manager &manager)
 int main()
 {
     Manager Manager;
-    // Manager.Add( "Duy", 36, 8);
-    // Manager.Add( "Trang", 30, 9);
-    // Manager.Add( "Tam", 20, 7);
-    // Manager.Add( "Minh", 40, 5);
-    // Manager.Add( "Lan", 40, 2);
-    // Manager.Add( "Phuong", 26, 7);
-    // Manager.View();
+    bool isContinue = true;
 
-    // Manager.Save("students.csv");
     Manager.Load("students.csv");
-    // Manager.EditById( 4, "Minh heo", 40, 5);
 
-    std::cout << "***MANAGE STUDENT***" << std::endl;
-    std::cout << "Press 1 to VIEW student list" << std::endl;
-    std::cout << "Press 2 to ADD student to list" << std::endl;
-    std::cout << "Press 3 to EDIT student infomation" << std::endl;
-    std::cout << "Press 4 to REMOVE student infomation" << std::endl;
-
-    int mode;
-
-    std::cin >> mode;
-
-    switch (mode)
+    do
     {
-    case VIEW:
-        Manager.View();
-        break;
+        char confirm;
 
-    case ADD:
-        AddStudent(Manager);
-        break;
+        std::cout << "***MANAGE STUDENT***" << std::endl;
+        std::cout << "Press 1 to VIEW student list" << std::endl;
+        std::cout << "Press 2 to ADD student to list" << std::endl;
+        std::cout << "Press 3 to EDIT student infomation" << std::endl;
+        std::cout << "Press 4 to REMOVE student infomation" << std::endl;
 
-    case EDIT:
-        EditStudent(Manager);
-        break;
+        int mode;
 
-    case REMOVE:
-        RemoveStudent(Manager);
-        break;
+        std::cin >> mode;
 
-    default:
-        break;
-    }
+        switch (mode)
+        {
+        case VIEW:
+            Manager.View();
+            break;
+
+        case ADD:
+            AddStudent(Manager);
+            break;
+
+        case EDIT:
+            EditStudent(Manager);
+            break;
+
+        case REMOVE:
+            RemoveStudent(Manager);
+            break;
+
+        default:
+            std::cout << "Please enter the number from 1 to 4" << std::endl;
+            break;
+        }
+
+        std::cout << "\n Do you want to continue? Y/N" << std::endl;
+        std::cin >> confirm;
+
+        if (confirm == 'y')
+        {
+            isContinue = true;
+        }
+        else
+        {
+            isContinue = false;
+        }
+
+    } while (isContinue);
+
+    std::cout << "***BYE BYE***" << std::endl;
 
     return 0;
 }
