@@ -23,18 +23,6 @@ void Manager::RemoveById(int removeId)
                    students.end());
 }
 
-void Manager::EditById(int id, const std::string &name, int age, int score)
-{
-    for (auto &x : students)
-    {
-        if (x.Id == id)
-        {
-            x.Name = name;
-            x.Age = age;
-            x.Score = score;
-        }
-    }
-}
 
 void Manager::SaveToCsv(const std::string &filename)
 {
@@ -100,4 +88,15 @@ void Manager::LoadFromCsv(const std::string &filename)
     }
 
     file.close();
+}
+
+void Manager::LoadFromSqlDatabase()
+{
+    students = Database::LoadData();
+
+    for (const auto &student : students)
+    {
+        if (Manager::maxId < student.Id)
+            Manager::maxId = student.Id;
+    }
 }

@@ -11,4 +11,7 @@ struct Student
     Student();
 
     Student(const std::string &name, int age, int score);
+
+    Student(int id, const std::string &name, int age, int score);
+
 };

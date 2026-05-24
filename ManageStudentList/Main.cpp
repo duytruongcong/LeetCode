@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 #include <sqlite3.h>
-#include "Student.h"
-#include "Manager.h"
-#include "Database/Database.h"
+#include "Include/Student.h"
+#include "Include/Manager.h"
+#include "Include/Database.h"
 
 const int VIEW = 1;
 const int ADD = 2;
@@ -22,8 +22,8 @@ void AddStudent(Manager &manager)
     std::cin >> age;
     std::cout << "\n Score: ";
     std::cin >> score;
-    manager.Add(name, age, score);
-    manager.SaveToCsv("students.csv");
+
+    manager.database.Insert(name, age, score);
 }
 
 void EditStudent(Manager &manager)
@@ -41,8 +41,8 @@ void EditStudent(Manager &manager)
     std::cin >> age;
     std::cout << "\n Score: ";
     std::cin >> score;
-    manager.EditById(id, name, age, score);
-    manager.SaveToCsv("students.csv");
+
+    manager.database.UpdateStudent(id, name, age, score);
 }
 
 void RemoveStudent(Manager &manager)
@@ -51,8 +51,7 @@ void RemoveStudent(Manager &manager)
     std::cout << "\n Which Id do you want to remove: ";
     std::cin >> id;
 
-    manager.RemoveById(id);
-    manager.Save("students.csv");
+    manager.database.RemoveById(id);
 }
 
 int main()
@@ -60,7 +59,8 @@ int main()
     Manager Manager;
     bool isContinue = true;
 
-    Manager.Load("students.csv");
+    //TODO: DUY FIX LATER
+    Manager.database.CreateTable();
 
     do
     {
@@ -79,6 +79,7 @@ int main()
         switch (mode)
         {
         case VIEW:
+            Manager.LoadFromSqlDatabase();
             Manager.View();
             break;
 

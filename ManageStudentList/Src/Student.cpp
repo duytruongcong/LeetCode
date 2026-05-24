@@ -13,3 +13,10 @@ Student::Student(const std::string &name, int age, int score)
     Age = age;
     Score = score;
 }
+Student::Student(int id, const std::string &name, int age, int score)
+{
+    Id = id;
+    Name = name;
+    Age = age;
+    Score = score;
+}
