@@ -5,12 +5,18 @@
 #include "Student.h"
 #include <fstream>
 #include <sstream>
+#include <Database.h>
 
 class Manager
 {
 public:
+
     static std::vector<Student> students;
+
     static int maxId;
+
+    static Database database;
+    
     Manager()
     {
     }
@@ -27,7 +33,9 @@ public:
 
     void EditById(int id, const std::string &name, int age, int score);
 
-    static void Save(const std::string &filename);
+    static void SaveToCsv(const std::string &filename);
 
-    static void Load(const std::string &filename);
+    static void LoadFromCsv(const std::string &filename);
+
+    static void SaveToSqlDatabase();
 };

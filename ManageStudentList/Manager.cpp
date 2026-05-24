@@ -36,7 +36,7 @@ void Manager::EditById(int id, const std::string &name, int age, int score)
     }
 }
 
-void Manager::Save(const std::string &filename)
+void Manager::SaveToCsv(const std::string &filename)
 {
     std::ofstream file(filename);
 
@@ -57,7 +57,7 @@ void Manager::Save(const std::string &filename)
     file.close();
 }
 
-void Manager::Load(const std::string &filename)
+void Manager::LoadFromCsv(const std::string &filename)
 {
     std::ifstream file(filename);
 

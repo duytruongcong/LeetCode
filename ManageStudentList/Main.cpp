@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sqlite3.h>
 #include "Student.h"
 #include "Manager.h"
+#include "Database/Database.h"
 
 const int VIEW = 1;
 const int ADD = 2;
@@ -21,7 +23,7 @@ void AddStudent(Manager &manager)
     std::cout << "\n Score: ";
     std::cin >> score;
     manager.Add(name, age, score);
-    manager.Save("students.csv");
+    manager.SaveToCsv("students.csv");
 }
 
 void EditStudent(Manager &manager)
@@ -40,7 +42,7 @@ void EditStudent(Manager &manager)
     std::cout << "\n Score: ";
     std::cin >> score;
     manager.EditById(id, name, age, score);
-    manager.Save("students.csv");
+    manager.SaveToCsv("students.csv");
 }
 
 void RemoveStudent(Manager &manager)
