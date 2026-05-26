@@ -23,7 +23,7 @@ void AddStudent(Manager &manager)
     std::cout << "\n Score: ";
     std::cin >> score;
 
-    manager.database.Insert(name, age, score);
+    manager.InsertStudent(name, age, score);
 }
 
 void EditStudent(Manager &manager)
@@ -42,7 +42,7 @@ void EditStudent(Manager &manager)
     std::cout << "\n Score: ";
     std::cin >> score;
 
-    manager.database.UpdateStudent(id, name, age, score);
+    manager.UpdateStudentById(id, name, age, score);
 }
 
 void RemoveStudent(Manager &manager)
@@ -51,16 +51,13 @@ void RemoveStudent(Manager &manager)
     std::cout << "\n Which Id do you want to remove: ";
     std::cin >> id;
 
-    manager.database.RemoveById(id);
+    manager.RemoveStudentById(id);
 }
 
 int main()
 {
     Manager Manager;
     bool isContinue = true;
-
-    //TODO: DUY FIX LATER
-    Manager.database.CreateTable();
 
     do
     {
@@ -79,7 +76,7 @@ int main()
         switch (mode)
         {
         case VIEW:
-            Manager.LoadFromSqlDatabase();
+            Manager.LoadDataFromDatabase();
             Manager.View();
             break;
 

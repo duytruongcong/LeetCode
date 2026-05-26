@@ -9,14 +9,13 @@
 
 class Manager
 {
+private:
+
+    std::vector<Student> students;
+
+    Database database;
+
 public:
-
-    static std::vector<Student> students;
-
-    static int maxId;
-
-    static Database database;
-    
     Manager()
     {
     }
@@ -25,17 +24,24 @@ public:
     {
     }
 
-    void Add(const std::string &name, int age, int score);
+    void CreateStudentTable();
+
+    void InsertStudent(const std::string &name, int age, int score);
+
+    void RemoveStudentById(int removeId);
 
     void View() const;
 
-    void RemoveById(int removeId);
+    void UpdateStudentById(int id, const std::string &name, int age, int score);
 
+    void LoadDataFromDatabase();
+
+    //TODO:DUY refactor later
     static void SaveToCsv(const std::string &filename);
 
+    //TODO:DUY refactor later
     static void LoadFromCsv(const std::string &filename);
 
-    static void LoadFromSqlDatabase();
-
+    //TODO:DUY refactor later
     static void SaveToSqlDatabase();
 };

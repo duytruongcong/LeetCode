@@ -1,13 +1,16 @@
 #include "Database.h"
 #include <iostream>
-
 #ifndef DATABASE_FILE_PATH
 #define DATABASE_FILE_PATH "Database/student.db"
 #endif
 
+Database::Database()
+{
+    CreateTable();
+}
+
 void Database::CreateTable()
 {
-    sqlite3 *db;
 
     int result = sqlite3_open(DATABASE_FILE_PATH, &db);
 
@@ -31,7 +34,6 @@ void Database::CreateTable()
 
 void Database::Insert(const std::string &name, int age, int score)
 {
-    sqlite3 *db;
 
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
     {
@@ -64,7 +66,6 @@ void Database::Insert(const std::string &name, int age, int score)
 std::vector<Student> Database::LoadData()
 {
     std::vector<Student> students;
-    sqlite3 *db;
 
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
     {
@@ -103,9 +104,8 @@ std::vector<Student> Database::LoadData()
     return students;
 }
 
-void Database::UpdateStudent(int id, const std::string &name, int age, int score)
+void Database::UpdateById(int id, const std::string &name, int age, int score)
 {
-    sqlite3 *db;
 
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
     {
@@ -149,7 +149,6 @@ void Database::UpdateStudent(int id, const std::string &name, int age, int score
 
 void Database::RemoveById(int id)
 {
-    sqlite3 *db;
 
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
     {

@@ -6,10 +6,14 @@
 
 class Database
 {
+private:
+    sqlite3 *db;
+
 public:
-    static void CreateTable();
-    static void Insert(const std::string &name, int age, int score);
-    static void UpdateStudent(int id, const std::string &name, int age, int score);
-    static void RemoveById(int id);
-    static std::vector<Student> LoadData();
+    Database();
+    void CreateTable();
+    void Insert(const std::string &name, int age, int score);
+    void UpdateById(int id, const std::string &name, int age, int score);
+    void RemoveById(int id);
+    std::vector<Student> LoadData();
 };

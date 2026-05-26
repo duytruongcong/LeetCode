@@ -1,13 +1,31 @@
 #include "Manager.h"
 
-std::vector<Student> Manager::students;
-int Manager::maxId = 0;
-
-void Manager::Add(const std::string &name, int age, int score)
+void Manager::InsertStudent(const std::string &name, int age, int score)
 {
-    students.emplace_back(name, age, score);
+    database.Insert(name, age, score);
 }
 
+void Manager::RemoveStudentById(int removeId)
+{
+    database.RemoveById(removeId);
+}
+
+void Manager::LoadDataFromDatabase()
+{
+    students = database.LoadData();
+}
+
+void Manager::UpdateStudentById(int id, const std::string &name, int age, int score)
+{
+    database.UpdateById(id, name, age, score);
+}
+
+void Manager::CreateStudentTable()
+{
+    database.CreateTable();
+}
+
+// TODO:DUY don't UI for manager
 void Manager::View() const
 {
     for (const auto &x : students)
@@ -15,14 +33,6 @@ void Manager::View() const
         std::cout << "Id: " << x.Id << "| Name: " << x.Name << "| Age: " << x.Age << "| Score: " << x.Score << std::endl;
     }
 }
-
-void Manager::RemoveById(int removeId)
-{
-    students.erase(std::remove_if(students.begin(), students.end(), [removeId](const Student &s)
-                                  { return s.Id == removeId; }),
-                   students.end());
-}
-
 
 void Manager::SaveToCsv(const std::string &filename)
 {
@@ -32,15 +42,15 @@ void Manager::SaveToCsv(const std::string &filename)
     {
         return;
     }
-
-    for (const auto student : Manager::students)
-    {
-        file << student.Id << ","
-             << student.Name << ","
-             << student.Age << ","
-             << student.Score
-             << "\n";
-    }
+    //TODO: 
+    // for (const auto student : students)
+    // {
+    //     file << student.Id << ","
+    //          << student.Name << ","
+    //          << student.Age << ","
+    //          << student.Score
+    //          << "\n";
+    // }
 
     file.close();
 }
@@ -53,50 +63,33 @@ void Manager::LoadFromCsv(const std::string &filename)
     {
         return;
     }
+    //TODO: DUY
+    // students.clear();
 
-    students.clear();
+    // std::string line;
 
-    std::string line;
+    // while (std::getline(file, line))
+    // {
+    //     std::stringstream ss(line);
 
-    while (std::getline(file, line))
-    {
-        std::stringstream ss(line);
+    //     std::string idStr;
+    //     std::string name;
+    //     std::string ageStr;
+    //     std::string scoreStr;
 
-        std::string idStr;
-        std::string name;
-        std::string ageStr;
-        std::string scoreStr;
+    //     std::getline(ss, idStr, ',');
+    //     std::getline(ss, name, ',');
+    //     std::getline(ss, ageStr, ',');
+    //     std::getline(ss, scoreStr, ',');
 
-        std::getline(ss, idStr, ',');
-        std::getline(ss, name, ',');
-        std::getline(ss, ageStr, ',');
-        std::getline(ss, scoreStr, ',');
+    //     Student student;
+    //     student.Id = std::stoi(idStr);
+    //     student.Name = name;
+    //     student.Age = std::stoi(ageStr);
+    //     student.Score = std::stoi(scoreStr);
 
-        Student student;
-        student.Id = std::stoi(idStr);
-        student.Name = name;
-        student.Age = std::stoi(ageStr);
-        student.Score = std::stoi(scoreStr);
-
-        students.push_back(student);
-    }
-
-    for (auto x : students)
-    {
-        if (Manager::maxId < x.Id)
-            Manager::maxId = x.Id;
-    }
+    //     students.push_back(student);
+    // }
 
     file.close();
-}
-
-void Manager::LoadFromSqlDatabase()
-{
-    students = Database::LoadData();
-
-    for (const auto &student : students)
-    {
-        if (Manager::maxId < student.Id)
-            Manager::maxId = student.Id;
-    }
 }
