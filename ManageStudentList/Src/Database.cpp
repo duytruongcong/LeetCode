@@ -11,7 +11,6 @@ Database::Database()
 
 void Database::CreateTable()
 {
-
     int result = sqlite3_open(DATABASE_FILE_PATH, &db);
 
     if (result != SQLITE_OK)
@@ -113,43 +112,31 @@ void Database::UpdateById(int id, const std::string &name, int age, int score)
         return;
     }
 
-    std::string sql =
-        "UPDATE STUDENT SET "
-        "NAME = '" +
-        name + "', "
-               "AGE = " +
-        std::to_string(age) + ", "
-                              "SCORE = " +
-        std::to_string(score) +
-        " WHERE ID = " + std::to_string(id) + ";";
+    const char *sql = "UPDATE STUDENT SET NAME = ?, AGE = ?, SCORE = ?"
+                      "WHERE ID = ?;";
 
-    char *messageError;
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+    sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, age);
+    sqlite3_bind_int(stmt, 3, score);
+    sqlite3_bind_int(stmt, 4, id);
 
-    int result = sqlite3_exec(db,
-                              sql.c_str(),
-                              NULL,
-                              0,
-                              &messageError);
-
-    if (result != SQLITE_OK)
-    {
-        std::cout << "Update failed: "
-                  << messageError
-                  << std::endl;
-
-        sqlite3_free(messageError);
-    }
-    else
+    if (sqlite3_step(stmt) == SQLITE_DONE)
     {
         std::cout << "Update success!\n";
     }
+    else
+    {
+        std::cout << "Update failed!\n";
+    }
 
+    sqlite3_finalize(stmt);
     sqlite3_close(db);
 }
 
 void Database::RemoveById(int id)
 {
-
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
     {
         std::cout << "Cannot open database!\n";
