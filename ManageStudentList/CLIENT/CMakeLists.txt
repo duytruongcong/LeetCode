@@ -1,21 +1,24 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(StudentManagement VERSION 1.0)
+project(StudentManagementClient VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(${PROJECT_NAME}
     Main.cpp
-    Src/Database.cpp
-    Src/Manager.cpp
-    Src/Student.cpp
-    Src/CSV.cpp
+    Database/Database.cpp
+    Manager/Manager.cpp
+    Models/Student.cpp
+    CSV/CSV.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
-        ${CMAKE_SOURCE_DIR}/Include
+        ${CMAKE_SOURCE_DIR}/Database
+        ${CMAKE_SOURCE_DIR}/Manager
+        ${CMAKE_SOURCE_DIR}/Models
+        ${CMAKE_SOURCE_DIR}/CSV
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE DATABASE_FILE_PATH="${CMAKE_SOURCE_DIR}/Database/student.db")

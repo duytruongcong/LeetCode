@@ -2,9 +2,9 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include "Student.h"
-#include "Database.h"
-#include "CSV.h"
+#include <Student.h>
+#include <Database.h>
+#include <CSV.h>
 
 class Manager
 {

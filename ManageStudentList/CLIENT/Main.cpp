@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 #include <sqlite3.h>
-#include "Include/Student.h"
-#include "Include/Manager.h"
-#include "Include/Database.h"
+#include <Student.h>
+#include <Manager.h>
+#include <Database.h>
 
 const int VIEW = 1;
 const int ADD = 2;
