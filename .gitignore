@@ -161,3 +161,9 @@ ManageStudentList/build/CMakeFiles/StudentManagement.dir/Src/Student.cpp.o
 ManageStudentList/Build/CMakeFiles/StudentManagement.dir/Src/Student.cpp.o.d
 ManageStudentList/build/.cmake/api/v1/reply/index-2026-05-26T01-15-18-0226.json
 ManageStudentList/Database/student.db
+
+ManageStudentList/CLIENT/Build/
+
+ManageStudentList/CLIENT/CSV/
+
+ManageStudentList/CLIENT/Database/

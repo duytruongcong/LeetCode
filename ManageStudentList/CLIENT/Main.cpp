@@ -10,6 +10,8 @@ const int VIEW = 1;
 const int ADD = 2;
 const int EDIT = 3;
 const int REMOVE = 4;
+const int WRITE_TO_CSV = 5;
+const int READ_FROM_CSV = 6;
 
 void AddStudent(Manager &manager)
 {
@@ -54,6 +56,23 @@ void RemoveStudent(Manager &manager)
     manager.RemoveStudentById(id);
 }
 
+void WriteToCsv(Manager &manager)
+{
+    if (manager.WriteToCsv())
+    {
+        std::cout << "\n Write to CSV successfully! ";
+    }
+    else
+    {
+        std::cout << "\n Write to CSV failed! ";
+    }
+}
+
+void ReadFromCsv(Manager &manager)
+{
+    manager.ReadFromCsv();
+}
+
 int main()
 {
     Manager Manager;
@@ -68,6 +87,8 @@ int main()
         std::cout << "Press 2 to ADD student to list" << std::endl;
         std::cout << "Press 3 to EDIT student infomation" << std::endl;
         std::cout << "Press 4 to REMOVE student infomation" << std::endl;
+        std::cout << "Press 5 to WRITE TO CSV file" << std::endl;
+        std::cout << "Press 6 to READ FROM CSV file" << std::endl;
 
         int mode;
 
@@ -92,8 +113,17 @@ int main()
             RemoveStudent(Manager);
             break;
 
+        case WRITE_TO_CSV:
+            WriteToCsv(Manager);
+            break;
+
+        case READ_FROM_CSV:
+            Manager.ReadFromCsv();
+            Manager.View();
+            break;
+
         default:
-            std::cout << "Please enter the number from 1 to 4" << std::endl;
+            std::cout << "Please enter the number from 1 to 5" << std::endl;
             break;
         }
 

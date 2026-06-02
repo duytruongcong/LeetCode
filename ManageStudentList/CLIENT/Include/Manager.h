@@ -3,9 +3,8 @@
 #include <algorithm>
 #include <iostream>
 #include "Student.h"
-#include <fstream>
-#include <sstream>
 #include "Database.h"
+#include "CSV.h"
 
 class Manager
 {
@@ -14,6 +13,8 @@ private:
     std::vector<Student> students;
 
     Database database;
+
+    CSV CsvHandle;
 
 public:
     Manager()
@@ -36,12 +37,7 @@ public:
 
     void LoadDataFromDatabase();
 
-    //TODO:DUY refactor later
-    static void SaveToCsv(const std::string &filename);
+    bool WriteToCsv();
 
-    //TODO:DUY refactor later
-    static void LoadFromCsv(const std::string &filename);
-
-    //TODO:DUY refactor later
-    static void SaveToSqlDatabase();
+    void ReadFromCsv();
 };
