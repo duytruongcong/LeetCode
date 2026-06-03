@@ -164,6 +164,8 @@ ManageStudentList/Database/student.db
 
 ManageStudentList/CLIENT/Build/
 
-ManageStudentList/CLIENT/CSV/
+ManageStudentList/LIBRARY/json/
 
-ManageStudentList/CLIENT/Database/
+*.csv
+
+*.db

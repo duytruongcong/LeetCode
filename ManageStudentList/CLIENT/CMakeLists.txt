@@ -11,6 +11,7 @@ add_executable(${PROJECT_NAME}
     Manager/Manager.cpp
     Models/Student.cpp
     CSV/CSV.cpp
+    Utils/JsonHelper.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -19,10 +20,13 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_SOURCE_DIR}/Manager
         ${CMAKE_SOURCE_DIR}/Models
         ${CMAKE_SOURCE_DIR}/CSV
+        ${CMAKE_SOURCE_DIR}/Utils
 )
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE DATABASE_FILE_PATH="${CMAKE_SOURCE_DIR}/Database/student.db")
-target_compile_definitions(${PROJECT_NAME} PRIVATE CSV_FILE_PATH="${CMAKE_SOURCE_DIR}/CSV/student.csv")
+target_include_directories(${PROJECT_NAME} PRIVATE ../LIBRARY/json/include)
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE DATABASE_FILE_PATH=\"${CMAKE_SOURCE_DIR}/Database/student.db\")
+target_compile_definitions(${PROJECT_NAME} PRIVATE CSV_FILE_PATH=\"${CMAKE_SOURCE_DIR}/CSV/student.csv\")
 
 find_package(SQLite3 REQUIRED)
 
