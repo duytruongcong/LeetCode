@@ -2,7 +2,7 @@
 #include <sqlite3.h>
 #include <string>
 #include <vector>
-#include "Student.h"
+#include <Student.h>
 
 class Database
 {
