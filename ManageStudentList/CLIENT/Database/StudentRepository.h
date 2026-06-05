@@ -4,13 +4,13 @@
 #include <vector>
 #include <Student.h>
 
-class Database
+class StudentRepository
 {
 private:
     sqlite3 *db;
 
 public:
-    Database();
+    StudentRepository();
     void CreateTable();
     void Insert(const std::string &name, int age, int score);
     void UpdateById(int id, const std::string &name, int age, int score);

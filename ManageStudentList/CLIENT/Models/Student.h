@@ -6,7 +6,7 @@ struct Student
     int Id;
     std::string Name;
     int Age;
-    int Score;
+    int Gpa;
 
     Student();
 

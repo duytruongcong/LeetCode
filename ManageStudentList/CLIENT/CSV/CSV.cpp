@@ -17,7 +17,7 @@ bool CSV::SaveToCsv( std::vector<Student> students)
         file << student.Id << ","
              << student.Name << ","
              << student.Age << ","
-             << student.Score
+             << student.Gpa
              << "\n";
     }
 
@@ -57,7 +57,7 @@ void CSV::LoadFromCsv( std::vector<Student> &students)
         student.Id = std::stoi(idStr);
         student.Name = name;
         student.Age = std::stoi(ageStr);
-        student.Score = std::stoi(scoreStr);
+        student.Gpa = std::stoi(scoreStr);
 
         students.push_back(student);
     }

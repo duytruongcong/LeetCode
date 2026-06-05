@@ -1,15 +1,15 @@
-#include "Database.h"
+#include "StudentRepository.h"
 #include <iostream>
 #ifndef DATABASE_FILE_PATH
 #define DATABASE_FILE_PATH "Database/student.db"
 #endif
 
-Database::Database()
+StudentRepository::StudentRepository()
 {
     CreateTable();
 }
 
-void Database::CreateTable()
+void StudentRepository::CreateTable()
 {
     int result = sqlite3_open(DATABASE_FILE_PATH, &db);
 
@@ -31,7 +31,7 @@ void Database::CreateTable()
     sqlite3_close(db);
 }
 
-void Database::Insert(const std::string &name, int age, int score)
+void StudentRepository::Insert(const std::string &name, int age, int score)
 {
 
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
@@ -62,7 +62,7 @@ void Database::Insert(const std::string &name, int age, int score)
     sqlite3_close(db);
 }
 
-std::vector<Student> Database::LoadData()
+std::vector<Student> StudentRepository::LoadData()
 {
     std::vector<Student> students;
 
@@ -103,7 +103,7 @@ std::vector<Student> Database::LoadData()
     return students;
 }
 
-void Database::UpdateById(int id, const std::string &name, int age, int score)
+void StudentRepository::UpdateById(int id, const std::string &name, int age, int score)
 {
 
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
@@ -135,7 +135,7 @@ void Database::UpdateById(int id, const std::string &name, int age, int score)
     sqlite3_close(db);
 }
 
-void Database::RemoveById(int id)
+void StudentRepository::RemoveById(int id)
 {
     if (sqlite3_open(DATABASE_FILE_PATH, &db) != SQLITE_OK)
     {

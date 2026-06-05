@@ -1,4 +1,4 @@
-add_library(DatabaseLib STATIC Database.cpp)
+add_library(DatabaseLib STATIC StudentRepository.cpp)
 find_package(SQLite3 REQUIRED)
 target_include_directories(DatabaseLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(DatabaseLib PRIVATE ModelsLib)

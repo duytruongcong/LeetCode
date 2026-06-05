@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <Student.h>
-#include <Database.h>
+#include <StudentRepository.h>
 #include <CSV.h>
 
 class Manager
@@ -12,7 +12,7 @@ private:
 
     std::vector<Student> students;
 
-    Database database;
+    StudentRepository database;
 
     CSV CsvHandle;
 

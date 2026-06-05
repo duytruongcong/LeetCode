@@ -42,6 +42,6 @@ void Manager::View() const
 {
     for (const auto &x : students)
     {
-        std::cout << "Id: " << x.Id << "| Name: " << x.Name << "| Age: " << x.Age << "| Score: " << x.Score << std::endl;
+        std::cout << "Id: " << x.Id << "| Name: " << x.Name << "| Age: " << x.Age << "| Score: " << x.Gpa << std::endl;
     }
 }

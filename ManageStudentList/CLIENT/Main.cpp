@@ -4,7 +4,7 @@
 #include <sqlite3.h>
 #include <Student.h>
 #include <Manager.h>
-#include <Database.h>
+#include <StudentRepository.h>
 
 const int VIEW = 1;
 const int ADD = 2;
