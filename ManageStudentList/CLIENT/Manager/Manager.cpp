@@ -2,27 +2,27 @@
 
 void Manager::InsertStudent(const std::string &name, int age, int score)
 {
-    database.Insert(name, age, score);
+    prtStudentRespository->Insert(name, age, score);
 }
 
 void Manager::RemoveStudentById(int removeId)
 {
-    database.RemoveById(removeId);
+    prtStudentRespository->RemoveById(removeId);
 }
 
 void Manager::LoadDataFromDatabase()
 {
-    students = database.LoadData();
+    students = prtStudentRespository->LoadData();
 }
 
 void Manager::UpdateStudentById(int id, const std::string &name, int age, int score)
 {
-    database.UpdateById(id, name, age, score);
+    prtStudentRespository->UpdateById(id, name, age, score);
 }
 
 void Manager::CreateStudentTable()
 {
-    database.CreateTable();
+    prtStudentRespository->CreateTable();
 }
 
 bool Manager::WriteToCsv()

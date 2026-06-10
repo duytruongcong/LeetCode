@@ -3,20 +3,24 @@
 #include <algorithm>
 #include <iostream>
 #include <Student.h>
-#include <StudentRepository.h>
+#include <IStudentRepository.h>
 #include <CSV.h>
+#include <memory>
 
 class Manager
 {
 private:
-
     std::vector<Student> students;
 
-    StudentRepository database;
+    std::shared_ptr<IStudentRepository> prtStudentRespository;
 
     CSV CsvHandle;
 
 public:
+    Manager(std::shared_ptr<IStudentRepository> ptrDatabase) : prtStudentRespository(ptrDatabase)
+    {
+    }
+
     Manager()
     {
     }

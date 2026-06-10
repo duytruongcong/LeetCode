@@ -75,7 +75,10 @@ void ReadFromCsv(Manager &manager)
 
 int main()
 {
-    Manager Manager;
+    auto repo = std::make_shared<StudentRepository>();
+
+    Manager mainManager(repo);
+
     bool isContinue = true;
 
     do
@@ -97,29 +100,29 @@ int main()
         switch (mode)
         {
         case VIEW:
-            Manager.LoadDataFromDatabase();
-            Manager.View();
+            mainManager.LoadDataFromDatabase();
+            mainManager.View();
             break;
 
         case ADD:
-            AddStudent(Manager);
+            AddStudent(mainManager);
             break;
 
         case EDIT:
-            EditStudent(Manager);
+            EditStudent(mainManager);
             break;
 
         case REMOVE:
-            RemoveStudent(Manager);
+            RemoveStudent(mainManager);
             break;
 
         case WRITE_TO_CSV:
-            WriteToCsv(Manager);
+            WriteToCsv(mainManager);
             break;
 
         case READ_FROM_CSV:
-            Manager.ReadFromCsv();
-            Manager.View();
+            mainManager.ReadFromCsv();
+            mainManager.View();
             break;
 
         default:
